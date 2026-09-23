@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <linearGradient id="crestGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#063B66"/>
+      <stop offset="100%" stop-color="#042744"/>
+    </linearGradient>
+  </defs>
+  <!-- Outer Ring -->
+  <circle cx="50" cy="50" r="48" fill="url(#crestGrad)" stroke="#F8C531" stroke-width="3"/>
+  <circle cx="50" cy="50" r="43" fill="none" stroke="#F8C531" stroke-width="1" stroke-dasharray="2 2"/>
+  
+  <!-- Sun Rays (Sunbeam motif) -->
+  <g stroke="#F8C531" stroke-width="2" opacity="0.9">
+    <line x1="50" y1="12" x2="50" y2="18"/>
+    <line x1="23" y1="23" x2="27" y2="27"/>
+    <line x1="77" y1="23" x2="73" y2="27"/>
+    <line x1="12" y1="50" x2="18" y2="50"/>
+    <line x1="88" y1="50" x2="82" y2="50"/>
+  </g>
+  
+  <!-- Rising Sun Half Circle -->
+  <path d="M32 46 A 18 18 0 0 1 68 46 Z" fill="#F8C531"/>
+
+  <!-- Open Book -->
+  <path d="M50 72 C44 67 32 66 22 70 L22 50 C32 46 44 47 50 52 C56 47 68 46 78 50 L78 70 C68 66 56 67 50 72 Z" fill="#FFFFFF"/>
+  <line x1="50" y1="52" x2="50" y2="72" stroke="#063B66" stroke-width="1.5"/>
+
+  <!-- Star of Excellence -->
+  <polygon points="50,22 52,27 57,28 53,32 54,37 50,34 46,37 47,32 43,28 48,27" fill="#FFFFFF"/>
+</svg>

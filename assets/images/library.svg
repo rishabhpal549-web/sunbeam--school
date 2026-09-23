@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" height="100%">
+  <defs>
+    <linearGradient id="libBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#042744" />
+      <stop offset="50%" stop-color="#063B66" />
+      <stop offset="100%" stop-color="#0a4b80" />
+    </linearGradient>
+    <linearGradient id="goldGlow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F8C531" />
+      <stop offset="100%" stop-color="#e5b324" />
+    </linearGradient>
+  </defs>
+  <!-- Background -->
+  <rect width="800" height="500" fill="url(#libBg)" />
+  
+  <!-- Architectural Bookcase Silhouette -->
+  <g opacity="0.15" fill="#FFFFFF">
+    <rect x="50" y="40" width="120" height="420" rx="4"/>
+    <rect x="200" y="40" width="120" height="420" rx="4"/>
+    <rect x="350" y="40" width="120" height="420" rx="4"/>
+    <rect x="500" y="40" width="120" height="420" rx="4"/>
+    <rect x="650" y="40" width="100" height="420" rx="4"/>
+    <!-- Shelves -->
+    <line x1="50" y1="120" x2="750" y2="120" stroke="#FFFFFF" stroke-width="6"/>
+    <line x1="50" y1="200" x2="750" y2="200" stroke="#FFFFFF" stroke-width="6"/>
+    <line x1="50" y1="280" x2="750" y2="280" stroke="#FFFFFF" stroke-width="6"/>
+    <line x1="50" y1="360" x2="750" y2="360" stroke="#FFFFFF" stroke-width="6"/>
+  </g>
+
+  <!-- Central Reading Hall Icon & Illumination -->
+  <circle cx="400" cy="220" r="110" fill="#031A2F" stroke="#F8C531" stroke-width="3" opacity="0.9" />
+  
+  <!-- Book Icon -->
+  <g transform="translate(340, 160) scale(1.2)" fill="url(#goldGlow)">
+    <path d="M50 80 C 40 70, 20 68, 0 72 L 0 15 C 20 10, 40 12, 50 22 C 60 12, 80 10, 100 15 L 100 72 C 80 68, 60 70, 50 80 Z" />
+    <line x1="50" y1="22" x2="50" y2="80" stroke="#042744" stroke-width="2"/>
+    <path d="M50 15 L 50 8" stroke="url(#goldGlow)" stroke-width="3"/>
+  </g>
+  
+  <!-- Subtle typography -->
+  <text x="400" y="380" font-family="'Poppins', sans-serif" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">SCHOOL CENTRAL LIBRARY &amp; READING HALL</text>
+  <text x="400" y="415" font-family="'Inter', sans-serif" font-size="14" font-weight="500" fill="#F8C531" text-anchor="middle" letter-spacing="2">KNOWLEDGE • RESEARCH • LITERATURE</text>
+</svg>

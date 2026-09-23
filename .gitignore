@@ -1,0 +1,12 @@
+# Download helper scripts
+download_*.ps1
+
+# IDE / OS Artifacts
+.vscode/
+.idea/
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# System logs
+*.log
