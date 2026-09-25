@@ -15,12 +15,57 @@
   const STORAGE_KEY_ANON = 'sunbeam_supabase_anon_key';
   const STORAGE_KEY_LOCAL_LEADS = 'sunbeam_local_leads';
   const STORAGE_KEY_LOCAL_ACTIVITIES = 'sunbeam_local_activities';
+  const STORAGE_KEY_ALERT_EMAIL = 'sunbeam_alert_email';
+  const DEFAULT_ALERT_EMAIL = 'rishabhpal549@gmail.com';
 
   // Default credentials for user's Supabase project
   const DEFAULT_CONFIG = {
     url: window.SUNBEAM_SUPABASE_URL || localStorage.getItem(STORAGE_KEY_URL) || 'https://udplvxyasfzjnoumlnnv.supabase.co',
     anonKey: window.SUNBEAM_SUPABASE_ANON || localStorage.getItem(STORAGE_KEY_ANON) || 'sb_publishable_56G0X0USEsML4MUzw8J0-A_OGNwZNg4'
   };
+
+  // Dispatch instant email alert to school administrator
+  async function sendEmailNotification(lead) {
+    const alertEmail = localStorage.getItem(STORAGE_KEY_ALERT_EMAIL) || DEFAULT_ALERT_EMAIL;
+    if (!alertEmail) return { success: false, message: 'No alert email configured' };
+
+    try {
+      const studentLabel = lead.student_name ? ` (Student: ${lead.student_name})` : '';
+      const subject = `🎓 New Sunbeam School Enquiry: ${lead.parent_name || 'Prospective Parent'}${studentLabel}`;
+      
+      const payload = {
+        _subject: subject,
+        _template: 'table',
+        _captcha: 'false',
+        'Lead Type': (lead.lead_type || 'admission').toUpperCase(),
+        'Parent / Guardian Name': lead.parent_name || 'N/A',
+        'Student Name': lead.student_name || 'N/A',
+        'Mobile Phone': lead.phone || 'N/A',
+        'Email Address': lead.email || 'N/A',
+        'Class Applying For': lead.class_applying || 'N/A',
+        'Subject / Title': lead.subject || 'Admission Enquiry',
+        'Parent Message / Requirements': lead.message || 'N/A',
+        'Source Page': lead.source_page || 'Website',
+        'Priority': (lead.priority || 'medium').toUpperCase(),
+        'Timestamp (IST)': new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' })
+      };
+
+      const res = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(alertEmail.trim())}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const json = await res.json().catch(() => ({}));
+      return { success: res.ok, data: json };
+    } catch (err) {
+      console.warn('Email notification dispatch skipped or failed:', err);
+      return { success: false, error: err };
+    }
+  }
 
   let supabaseInstance = null;
   let isSupabaseReady = false;
@@ -392,6 +437,8 @@
             .select();
 
           if (!error && data && data.length > 0) {
+            // Trigger instant email notification to school admin
+            sendEmailNotification(sanitized).catch(() => {});
             return { success: true, data: data[0], source: 'supabase' };
           }
 
@@ -407,6 +454,7 @@
           const enqRes = await client.from('enquiries').insert([enqPayload]).select();
           if (!enqRes.error && enqRes.data && enqRes.data.length > 0) {
             const saved = { ...sanitized, ...enqRes.data[0], parent_name: enqRes.data[0].Parent_name || sanitized.parent_name };
+            sendEmailNotification(sanitized).catch(() => {});
             return { success: true, data: saved, source: 'supabase' };
           }
 
@@ -427,6 +475,9 @@
       const leads = getLocalLeads();
       leads.unshift(newLead);
       saveLocalLeads(leads);
+
+      // Trigger instant email notification to school admin
+      sendEmailNotification(sanitized).catch(() => {});
 
       return { success: true, data: newLead, source: 'local' };
     },
@@ -620,6 +671,33 @@
         console.warn('Realtime subscription failed:', err);
         return null;
       }
+    },
+
+    // Alert Email configuration
+    getAlertEmail: function () {
+      return localStorage.getItem(STORAGE_KEY_ALERT_EMAIL) || DEFAULT_ALERT_EMAIL;
+    },
+
+    setAlertEmail: function (email) {
+      if (email && email.trim()) {
+        localStorage.setItem(STORAGE_KEY_ALERT_EMAIL, email.trim());
+      }
+    },
+
+    sendTestNotification: async function (targetEmail) {
+      const email = targetEmail || this.getAlertEmail();
+      return await sendEmailNotification({
+        lead_type: 'System Test Alert',
+        parent_name: 'Admissions Desk (Verification)',
+        student_name: 'Sample Student Aarav',
+        phone: '9839012345',
+        email: email,
+        class_applying: 'Middle School (Classes 6-8)',
+        subject: 'Sunbeam School Email Notification Verification',
+        message: 'This is a test notification confirming that instant enquiry alerts are operational and delivering to your email address!',
+        source_page: 'Admissions CRM Settings',
+        priority: 'high'
+      });
     }
   };
 

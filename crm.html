@@ -52,6 +52,13 @@
           <span style="font-size: 0.7rem; opacity: 0.8;">⚙️</span>
         </button>
 
+        <!-- Email Alert Status Pill -->
+        <button id="emailAlertStatusBtn" class="crm-backend-status-pill" title="Instant Email Notification Settings">
+          <span class="crm-status-dot pulse ready" style="background: #10b981;"></span>
+          <span id="emailAlertStatusText">Email: rishabhpal549@gmail.com</span>
+          <span style="font-size: 0.75rem;">🔔</span>
+        </button>
+
         <button id="btnExportCsv" class="btn-crm btn-crm-outline" title="Export leads to CSV">
           <span>📥</span> Export CSV
         </button>
@@ -661,6 +668,54 @@
         </button>
         <button type="button" class="btn-crm btn-crm-primary" id="btnDoneSupabaseModal">
           Close Settings
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Email Alert Settings Modal -->
+  <div class="crm-modal-overlay" id="emailAlertModal" role="dialog" aria-modal="true" aria-labelledby="emailAlertModalTitle">
+    <div class="crm-modal-card" style="max-width: 520px;">
+      <div class="crm-modal-header">
+        <div style="display: flex; align-items: center; gap: 0.6rem;">
+          <span style="font-size: 1.3rem;">🔔</span>
+          <div>
+            <h3 class="crm-modal-title" id="emailAlertModalTitle" style="font-size: 1.15rem;">Instant Email Notifications</h3>
+            <p style="font-size: 0.76rem; color: var(--crm-text-light); margin: 0;">Receive an instant email alert whenever a parent submits an admission enquiry.</p>
+          </div>
+        </div>
+        <button type="button" class="crm-modal-close" id="btnCloseEmailAlertModal" aria-label="Close">&times;</button>
+      </div>
+      <div class="crm-modal-body">
+        <div class="crm-form-group">
+          <label class="crm-label" for="cfgAlertEmail">Notification Email Address <span style="color: red;">*</span></label>
+          <input type="email" id="cfgAlertEmail" class="crm-input" value="rishabhpal549@gmail.com" placeholder="your.email@gmail.com">
+          <div style="font-size: 0.74rem; color: var(--crm-text-muted); margin-top: 0.35rem;">
+            📬 Every enquiry submitted on website or quick admission modal will be forwarded immediately to this inbox.
+          </div>
+        </div>
+
+        <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: var(--crm-radius-md); padding: 0.85rem; margin-bottom: 1.25rem;">
+          <div style="display: flex; gap: 0.5rem; align-items: flex-start;">
+            <span style="font-size: 1.1rem; line-height: 1;">💡</span>
+            <div style="font-size: 0.78rem; color: #1e40af; line-height: 1.45;">
+              <strong>One-time Setup Note:</strong> When the first enquiry is triggered, FormSubmit sends a one-click activation link to your inbox. Simply click <em>"Activate Form"</em> once, and all future enquiries will arrive directly in your inbox.
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem;">
+          <button type="button" id="btnSaveAlertEmail" class="btn-crm btn-crm-primary" style="font-size: 0.84rem;">
+            Save Email Address
+          </button>
+          <button type="button" id="btnSendTestAlert" class="btn-crm btn-crm-gold" style="font-size: 0.84rem;">
+            📨 Send Test Notification
+          </button>
+        </div>
+      </div>
+      <div class="crm-modal-footer">
+        <button type="button" class="btn-crm btn-crm-ghost" id="btnCloseAlertModalBottom">
+          Close
         </button>
       </div>
     </div>

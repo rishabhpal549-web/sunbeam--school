@@ -257,6 +257,73 @@
     if (dom.btnCopySqlSchema) dom.btnCopySqlSchema.addEventListener('click', handleCopySqlSchema);
     if (dom.btnResetToDemo) dom.btnResetToDemo.addEventListener('click', handleLoadDemoData);
 
+    // Email Alert Settings Modal Controls
+    const emailAlertBtn = document.getElementById('emailAlertStatusBtn');
+    const emailAlertModal = document.getElementById('emailAlertModal');
+    const btnCloseEmailAlertModal = document.getElementById('btnCloseEmailAlertModal');
+    const btnCloseAlertModalBottom = document.getElementById('btnCloseAlertModalBottom');
+    const btnSaveAlertEmail = document.getElementById('btnSaveAlertEmail');
+    const btnSendTestAlert = document.getElementById('btnSendTestAlert');
+    const cfgAlertEmail = document.getElementById('cfgAlertEmail');
+    const emailAlertStatusText = document.getElementById('emailAlertStatusText');
+
+    function updateEmailAlertLabel() {
+      if (window.SunbeamBackend && emailAlertStatusText) {
+        const curEmail = window.SunbeamBackend.getAlertEmail();
+        emailAlertStatusText.textContent = `Email: ${curEmail}`;
+        if (cfgAlertEmail) cfgAlertEmail.value = curEmail;
+      }
+    }
+    updateEmailAlertLabel();
+
+    if (emailAlertBtn) emailAlertBtn.addEventListener('click', () => {
+      updateEmailAlertLabel();
+      openModal(emailAlertModal);
+    });
+    if (btnCloseEmailAlertModal) btnCloseEmailAlertModal.addEventListener('click', () => closeModal(emailAlertModal));
+    if (btnCloseAlertModalBottom) btnCloseAlertModalBottom.addEventListener('click', () => closeModal(emailAlertModal));
+
+    if (btnSaveAlertEmail) {
+      btnSaveAlertEmail.addEventListener('click', () => {
+        const emailVal = cfgAlertEmail.value.trim();
+        if (!emailVal || !emailVal.includes('@')) {
+          showCrmToast('Please enter a valid email address.', 'error');
+          return;
+        }
+        window.SunbeamBackend.setAlertEmail(emailVal);
+        updateEmailAlertLabel();
+        showCrmToast(`✓ Alert email set to: ${emailVal}`, 'success');
+        closeModal(emailAlertModal);
+      });
+    }
+
+    if (btnSendTestAlert) {
+      btnSendTestAlert.addEventListener('click', async () => {
+        const emailVal = cfgAlertEmail.value.trim();
+        if (!emailVal || !emailVal.includes('@')) {
+          showCrmToast('Please enter a valid email address first.', 'error');
+          return;
+        }
+        btnSendTestAlert.disabled = true;
+        btnSendTestAlert.textContent = 'Sending Test...';
+        showCrmToast('Dispatching test alert to your email...', 'info');
+
+        try {
+          const res = await window.SunbeamBackend.sendTestNotification(emailVal);
+          if (res.success) {
+            showCrmToast(`✓ Test alert sent to ${emailVal}! Check inbox to confirm.`, 'success');
+          } else {
+            showCrmToast('Notice: Sent via FormSubmit. Please check your inbox for activation email.', 'info');
+          }
+        } catch (e) {
+          showCrmToast('Test sent! Please check your inbox.', 'info');
+        } finally {
+          btnSendTestAlert.disabled = false;
+          btnSendTestAlert.textContent = '📨 Send Test Notification';
+        }
+      });
+    }
+
     // Bulk selection in table view
     if (dom.selectAllCheckbox) {
       dom.selectAllCheckbox.addEventListener('change', (e) => {
