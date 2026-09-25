@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admissions &amp; Lead Management CRM — Sunbeam English School, Bhagwanpur</title>
+  <meta name="description" content="Centralized Admissions CRM and Lead Management System for Sunbeam English School, Bhagwanpur, Varanasi. Real-time Supabase backend, Kanban pipeline, and parent communications.">
+  <link rel="icon" type="image/svg+xml" href="assets/images/school_crest.svg">
+  
+  <!-- Google Fonts: Poppins & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/crm.css">
+</head>
+<body class="crm-body">
+
+  <!-- =========================================================================
+       1. CRM EXECUTIVE TOPBAR
+       ========================================================================= -->
+  <header class="crm-header" role="banner">
+    <div class="crm-header-inner">
+      <!-- School Brand Identity -->
+      <a href="index.html" class="crm-brand" title="Return to School Website">
+        <div class="crm-brand-logo">
+          <img src="assets/images/school_crest.svg" alt="Sunbeam Crest" width="34" height="34">
+        </div>
+        <div class="crm-brand-titles">
+          <h1>
+            Sunbeam English School
+            <span class="crm-badge-year">AY 2026–27</span>
+          </h1>
+          <div class="crm-brand-subtitle">Bhagwanpur, Varanasi &bull; Admissions &amp; Lead CRM</div>
+        </div>
+      </a>
+
+      <!-- Global Search -->
+      <div class="crm-search-box">
+        <span class="crm-search-icon">🔍</span>
+        <input type="text" id="globalSearchInput" class="crm-search-input" placeholder="Search by student, parent, phone, email, or grade (Ctrl+/)...">
+      </div>
+
+      <!-- Action Controls -->
+      <div class="crm-header-actions">
+        <!-- Supabase Connection Status Pill -->
+        <button id="supabaseStatusBtn" class="crm-backend-status-pill" title="Click to view or edit Supabase Backend Settings">
+          <span id="backendStatusDot" class="crm-status-dot pulse local"></span>
+          <span id="backendStatusText">Checking Backend...</span>
+          <span style="font-size: 0.7rem; opacity: 0.8;">⚙️</span>
+        </button>
+
+        <button id="btnExportCsv" class="btn-crm btn-crm-outline" title="Export leads to CSV">
+          <span>📥</span> Export CSV
+        </button>
+
+        <button id="btnOpenNewLeadModal" class="btn-crm btn-crm-gold">
+          <span>➕</span> Add Lead
+        </button>
+
+        <a href="index.html" class="btn-crm btn-crm-ghost" style="color: #fff; opacity: 0.85;" title="Return to website">
+          <span>🌐</span> Site
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- =========================================================================
+       2. MAIN CRM WORKSPACE
+       ========================================================================= -->
+  <main class="crm-main-content" id="crmApp">
+
+    <!-- KPI Performance Metric Cards -->
+    <section class="crm-kpi-grid" aria-label="Key Admission Metrics">
+      <div class="crm-kpi-card kpi-total active" data-filter-status="all" title="View all enquiries">
+        <div>
+          <div class="crm-kpi-title">Total Inquiries</div>
+          <div class="crm-kpi-value" id="kpiTotalCount">--</div>
+          <div class="crm-kpi-sub">All active student leads</div>
+        </div>
+        <div class="crm-kpi-icon">📊</div>
+      </div>
+
+      <div class="crm-kpi-card kpi-new" data-filter-status="new" title="View newly received leads requiring counselor review">
+        <div>
+          <div class="crm-kpi-title">New Inquiries</div>
+          <div class="crm-kpi-value" id="kpiNewCount">--</div>
+          <div class="crm-kpi-sub">Needs response</div>
+        </div>
+        <div class="crm-kpi-icon">⚡</div>
+      </div>
+
+      <div class="crm-kpi-card kpi-contacted" data-filter-status="contacted" title="View leads currently under counselor follow-up">
+        <div>
+          <div class="crm-kpi-title">In Follow-Up</div>
+          <div class="crm-kpi-value" id="kpiContactedCount">--</div>
+          <div class="crm-kpi-sub">Contacted / In Discussion</div>
+        </div>
+        <div class="crm-kpi-icon">📞</div>
+      </div>
+
+      <div class="crm-kpi-card kpi-visit" data-filter-status="campus_visit" title="View scheduled campus visits">
+        <div>
+          <div class="crm-kpi-title">Campus Tours</div>
+          <div class="crm-kpi-value" id="kpiVisitCount">--</div>
+          <div class="crm-kpi-sub">Bhagwanpur Campus Visits</div>
+        </div>
+        <div class="crm-kpi-icon">🏫</div>
+      </div>
+
+      <div class="crm-kpi-card kpi-enrolled" data-filter-status="enrolled" title="View enrolled students">
+        <div>
+          <div class="crm-kpi-title">Admissions Confirmed</div>
+          <div class="crm-kpi-value" id="kpiEnrolledCount">--</div>
+          <div class="crm-kpi-sub">Form &amp; Fee Completed</div>
+        </div>
+        <div class="crm-kpi-icon">🎓</div>
+      </div>
+
+      <div class="crm-kpi-card kpi-conversion" title="Conversion rate from inquiry to enrollment">
+        <div>
+          <div class="crm-kpi-title">Conversion Rate</div>
+          <div class="crm-kpi-value" id="kpiConversionRate">--%</div>
+          <div class="crm-kpi-sub">Inquiry &rarr; Admission</div>
+        </div>
+        <div class="crm-kpi-icon">🎯</div>
+      </div>
+    </section>
+
+    <!-- Toolbar: View Switcher & Filters -->
+    <div class="crm-toolbar">
+      <!-- Dual View Switcher -->
+      <div class="crm-view-switch" role="tablist">
+        <button class="crm-view-btn active" id="tabKanbanBtn" role="tab" aria-selected="true">
+          <span>📋</span> Kanban Board
+        </button>
+        <button class="crm-view-btn" id="tabTableBtn" role="tab" aria-selected="false">
+          <span>📑</span> Table View
+        </button>
+        <button class="crm-view-btn" id="tabAnalyticsBtn" role="tab" aria-selected="false">
+          <span>📈</span> Funnel &amp; Insights
+        </button>
+      </div>
+
+      <!-- Advanced Filter Controls -->
+      <div class="crm-filters">
+        <!-- Lead Type -->
+        <select id="filterLeadType" class="crm-select" aria-label="Filter by Lead Type">
+          <option value="all">All Inquiries</option>
+          <option value="admission">🎓 Admission Form</option>
+          <option value="contact">✉️ General Contact</option>
+        </select>
+
+        <!-- Grade Level -->
+        <select id="filterGrade" class="crm-select" aria-label="Filter by Grade">
+          <option value="all">All Grade Levels</option>
+          <option value="Primary">Primary (Classes 1–5)</option>
+          <option value="Middle">Middle School (Classes 6–8)</option>
+          <option value="Secondary">Secondary (Classes 9–10)</option>
+          <option value="Senior Secondary">Senior Secondary (Classes 11–12)</option>
+        </select>
+
+        <!-- Priority -->
+        <select id="filterPriority" class="crm-select" aria-label="Filter by Priority">
+          <option value="all">All Priorities</option>
+          <option value="urgent">🔥 Urgent</option>
+          <option value="high">High Priority</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+
+        <!-- Counselor Filter -->
+        <select id="filterCounselor" class="crm-select" aria-label="Filter by Counselor">
+          <option value="all">All Counselors</option>
+          <option value="Admissions Desk">Admissions Desk</option>
+          <option value="Counselor Anjali">Counselor Anjali</option>
+          <option value="Counselor Manish">Counselor Manish</option>
+          <option value="Principal Office">Principal Office</option>
+        </select>
+
+        <!-- Follow-up Due Today Toggle -->
+        <button id="filterTodayFollowup" class="crm-chip-filter">
+          <span>⏰</span> Due Today
+        </button>
+
+        <!-- Reset Button -->
+        <button id="btnResetFilters" class="btn-crm btn-crm-ghost" style="font-size: 0.78rem; padding: 0.35rem 0.65rem;">
+          Reset
+        </button>
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         VIEW 1: KANBAN PIPELINE BOARD
+         ======================================================================= -->
+    <div id="kanbanView" class="crm-kanban-board">
+      <!-- 1. New Inquiries -->
+      <div class="kanban-col col-new" data-status="new">
+        <div class="kanban-col-header">
+          <div class="kanban-col-title">
+            <span class="col-indicator"></span>
+            <span>New Inquiries</span>
+          </div>
+          <span class="kanban-count-badge" id="count-new">0</span>
+        </div>
+        <div class="kanban-cards-wrapper" id="colCards-new"></div>
+      </div>
+
+      <!-- 2. Contacted -->
+      <div class="kanban-col col-contacted" data-status="contacted">
+        <div class="kanban-col-header">
+          <div class="kanban-col-title">
+            <span class="col-indicator"></span>
+            <span>Contacted</span>
+          </div>
+          <span class="kanban-count-badge" id="count-contacted">0</span>
+        </div>
+        <div class="kanban-cards-wrapper" id="colCards-contacted"></div>
+      </div>
+
+      <!-- 3. Campus Visit -->
+      <div class="kanban-col col-visit" data-status="campus_visit">
+        <div class="kanban-col-header">
+          <div class="kanban-col-title">
+            <span class="col-indicator"></span>
+            <span>Campus Visit</span>
+          </div>
+          <span class="kanban-count-badge" id="count-campus_visit">0</span>
+        </div>
+        <div class="kanban-cards-wrapper" id="colCards-campus_visit"></div>
+      </div>
+
+      <!-- 4. Assessment / Docs Pending -->
+      <div class="kanban-col col-assessment" data-status="assessment">
+        <div class="kanban-col-header">
+          <div class="kanban-col-title">
+            <span class="col-indicator"></span>
+            <span>Assessment &amp; Docs</span>
+          </div>
+          <span class="kanban-count-badge" id="count-assessment">0</span>
+        </div>
+        <div class="kanban-cards-wrapper" id="colCards-assessment"></div>
+      </div>
+
+      <!-- 5. Enrolled / Confirmed -->
+      <div class="kanban-col col-enrolled" data-status="enrolled">
+        <div class="kanban-col-header">
+          <div class="kanban-col-title">
+            <span class="col-indicator"></span>
+            <span>Enrolled</span>
+          </div>
+          <span class="kanban-count-badge" id="count-enrolled">0</span>
+        </div>
+        <div class="kanban-cards-wrapper" id="colCards-enrolled"></div>
+      </div>
+
+      <!-- 6. Dropped / Lost -->
+      <div class="kanban-col col-dropped" data-status="dropped">
+        <div class="kanban-col-header">
+          <div class="kanban-col-title">
+            <span class="col-indicator"></span>
+            <span>Dropped / Archived</span>
+          </div>
+          <span class="kanban-count-badge" id="count-dropped">0</span>
+        </div>
+        <div class="kanban-cards-wrapper" id="colCards-dropped"></div>
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         VIEW 2: DATA TABLE VIEW
+         ======================================================================= -->
+    <div id="tableView" class="crm-table-container" style="display: none;">
+      <div class="crm-table-header-tools">
+        <div style="font-weight: 600; font-size: 0.88rem; color: var(--crm-primary);">
+          Showing <span id="tableLeadCount">0</span> inquiries
+        </div>
+        <div style="display: flex; gap: 0.5rem;">
+          <button id="btnBulkStatusContacted" class="btn-crm btn-crm-outline" style="color: var(--crm-text); border-color: var(--crm-border);">
+            Mark Selected as Contacted
+          </button>
+        </div>
+      </div>
+      <div style="overflow-x: auto;">
+        <table class="crm-table">
+          <thead>
+            <tr>
+              <th style="width: 40px;"><input type="checkbox" id="selectAllCheckbox"></th>
+              <th>Student &amp; Parent</th>
+              <th>Grade / Class</th>
+              <th>Phone &amp; Email</th>
+              <th>Status</th>
+              <th>Priority</th>
+              <th>Follow-up Due</th>
+              <th>Counselor</th>
+              <th>Source</th>
+              <th>Date</th>
+              <th style="text-align: right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="leadsTableBody">
+            <!-- Dynamic Rows -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- =======================================================================
+         VIEW 3: ANALYTICS & FUNNEL VIEW
+         ======================================================================= -->
+    <div id="analyticsView" style="display: none;">
+      <div class="crm-analytics-grid">
+        <!-- Funnel Progress -->
+        <div class="analytics-card">
+          <h3>Admissions Conversion Funnel</h3>
+          <p style="font-size: 0.82rem; color: var(--crm-text-muted); margin-bottom: 1.25rem;">
+            Progression of prospective students from initial web enquiry to verified enrollment for Academic Year 2026–27.
+          </p>
+          <div class="funnel-bar-wrapper" id="funnelStepsContainer">
+            <!-- Generated Dynamically -->
+          </div>
+        </div>
+
+        <!-- Grade Distribution & Lead Sources -->
+        <div style="display: flex; flex-direction: column; gap: 1.25rem;">
+          <div class="analytics-card">
+            <h3>Inquiries by Class Level</h3>
+            <div id="gradeDistributionContainer" style="display: flex; flex-direction: column; gap: 0.75rem;">
+              <!-- Generated Dynamically -->
+            </div>
+          </div>
+
+          <div class="analytics-card">
+            <h3>Lead Acquisition Source</h3>
+            <div id="sourceDistributionContainer" style="display: flex; flex-direction: column; gap: 0.65rem;">
+              <!-- Generated Dynamically -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- =========================================================================
+       3. LEAD DETAIL & ACTIVITY DRAWER (SLIDE-OVER)
+       ========================================================================= -->
+  <div class="crm-drawer-overlay" id="drawerOverlay"></div>
+  <aside class="crm-drawer" id="leadDrawer" aria-label="Lead Detail Drawer">
+    <div class="crm-drawer-header">
+      <div>
+        <div style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; opacity: 0.8;" id="drawerLeadType">
+          Admission Enquiry
+        </div>
+        <h2 style="font-size: 1.25rem; font-weight: 700; color: #fff; margin: 0;" id="drawerStudentName">
+          Student Name
+        </h2>
+        <div style="font-size: 0.82rem; opacity: 0.9;" id="drawerParentSubtitle">
+          Parent: Rajesh Kumar
+        </div>
+      </div>
+      <button class="crm-drawer-close" id="btnDrawerClose" aria-label="Close Drawer">&times;</button>
+    </div>
+
+    <div class="crm-drawer-body">
+      <!-- Quick Action Buttons: WhatsApp, Call, Email -->
+      <div class="drawer-action-hero">
+        <a href="#" id="drawerBtnWhatsApp" class="btn-drawer-action action-wa" target="_blank" rel="noopener">
+          <span style="font-size: 1.25rem;">💬</span>
+          <span>WhatsApp</span>
+        </a>
+        <a href="#" id="drawerBtnCall" class="btn-drawer-action">
+          <span style="font-size: 1.25rem;">📞</span>
+          <span>Call Parent</span>
+        </a>
+        <a href="#" id="drawerBtnEmail" class="btn-drawer-action">
+          <span style="font-size: 1.25rem;">✉️</span>
+          <span>Send Email</span>
+        </a>
+      </div>
+
+      <!-- Lead Status, Priority, Counselor, Follow-up Date Form -->
+      <div style="background: var(--crm-surface-hover); padding: 1.25rem; border-radius: var(--crm-radius-md); border: 1px solid var(--crm-border);">
+        <h4 style="font-size: 0.84rem; text-transform: uppercase; color: var(--crm-text-muted); margin-bottom: 0.85rem; font-weight: 700;">
+          Counselor Workflow Controls
+        </h4>
+
+        <div class="crm-grid-2">
+          <div class="crm-form-group">
+            <label class="crm-label" for="drawerStatusSelect">Pipeline Stage</label>
+            <select id="drawerStatusSelect" class="crm-select-full">
+              <option value="new">📥 New Inquiry</option>
+              <option value="contacted">📞 Contacted</option>
+              <option value="campus_visit">🏫 Campus Visit Scheduled</option>
+              <option value="assessment">📝 Assessment / Docs</option>
+              <option value="enrolled">🎓 Enrolled &amp; Fee Paid</option>
+              <option value="dropped">❌ Dropped / Lost</option>
+            </select>
+          </div>
+
+          <div class="crm-form-group">
+            <label class="crm-label" for="drawerPrioritySelect">Priority</label>
+            <select id="drawerPrioritySelect" class="crm-select-full">
+              <option value="urgent">🔥 Urgent</option>
+              <option value="high">High</option>
+              <option value="medium">Medium</option>
+              <option value="low">Low</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="crm-grid-2">
+          <div class="crm-form-group">
+            <label class="crm-label" for="drawerCounselorSelect">Assigned Counselor</label>
+            <select id="drawerCounselorSelect" class="crm-select-full">
+              <option value="Admissions Desk">Admissions Desk</option>
+              <option value="Counselor Anjali">Counselor Anjali</option>
+              <option value="Counselor Manish">Counselor Manish</option>
+              <option value="Principal Office">Principal Office</option>
+            </select>
+          </div>
+
+          <div class="crm-form-group">
+            <label class="crm-label" for="drawerFollowupInput">Next Follow-Up Date</label>
+            <input type="date" id="drawerFollowupInput" class="crm-input">
+          </div>
+        </div>
+      </div>
+
+      <!-- Applicant Details -->
+      <div>
+        <h4 style="font-size: 0.84rem; text-transform: uppercase; color: var(--crm-text-muted); margin-bottom: 0.65rem; font-weight: 700;">
+          Lead Profile
+        </h4>
+        <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.85rem;">
+          <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--crm-border-subtle); padding-bottom: 0.35rem;">
+            <span style="color: var(--crm-text-muted);">Class Applying For:</span>
+            <span style="font-weight: 600;" id="drawerClassApplying">--</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--crm-border-subtle); padding-bottom: 0.35rem;">
+            <span style="color: var(--crm-text-muted);">Contact Phone:</span>
+            <span style="font-weight: 600;" id="drawerPhone">--</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--crm-border-subtle); padding-bottom: 0.35rem;">
+            <span style="color: var(--crm-text-muted);">Email Address:</span>
+            <span style="font-weight: 600;" id="drawerEmail">--</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--crm-border-subtle); padding-bottom: 0.35rem;">
+            <span style="color: var(--crm-text-muted);">Submission Source:</span>
+            <span style="font-weight: 600;" id="drawerSource">--</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; border-bottom: 1px dashed var(--crm-border-subtle); padding-bottom: 0.35rem;">
+            <span style="color: var(--crm-text-muted);">Received On:</span>
+            <span style="font-weight: 600;" id="drawerCreatedAt">--</span>
+          </div>
+          <div style="margin-top: 0.4rem;">
+            <div style="color: var(--crm-text-muted); margin-bottom: 0.25rem;">Parent Query / Message:</div>
+            <div style="background: #fff; border: 1px solid var(--crm-border); border-radius: var(--crm-radius-sm); padding: 0.75rem; font-style: italic; color: #334155;" id="drawerMessage">
+              --
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Counselor Activity & Notes Section -->
+      <div>
+        <h4 style="font-size: 0.84rem; text-transform: uppercase; color: var(--crm-text-muted); margin-bottom: 0.75rem; font-weight: 700;">
+          Counselor Activity &amp; Call Logs
+        </h4>
+
+        <!-- Post a Note Box -->
+        <div style="margin-bottom: 1.25rem;">
+          <div style="display: flex; gap: 0.5rem; margin-bottom: 0.4rem;">
+            <select id="newActivityType" class="crm-select" style="font-size: 0.78rem;">
+              <option value="note">📝 Internal Note</option>
+              <option value="call">📞 Phone Call Log</option>
+              <option value="whatsapp">💬 WhatsApp Message</option>
+              <option value="campus_visit">🏫 Campus Visit</option>
+            </select>
+          </div>
+          <textarea id="newActivityInput" class="crm-textarea" rows="2" placeholder="Record parent call feedback, campus visit notes, or student document remarks..."></textarea>
+          <button id="btnPostActivity" class="btn-crm btn-crm-primary" style="margin-top: 0.4rem; font-size: 0.78rem;">
+            Post Activity Log
+          </button>
+        </div>
+
+        <!-- Activity Timeline -->
+        <div class="crm-timeline" id="drawerTimeline">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Delete Lead Button at Bottom -->
+      <div style="padding-top: 1rem; border-top: 1px solid var(--crm-border); display: flex; justify-content: flex-end;">
+        <button id="btnDeleteLead" class="btn-crm btn-crm-ghost" style="color: #DC2626; font-size: 0.78rem;">
+          🗑️ Delete Lead Record
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- =========================================================================
+       4. MODAL: ADD NEW MANUAL LEAD (WALK-IN / PHONE INQUIRY)
+       ========================================================================= -->
+  <div class="crm-modal-backdrop" id="newLeadModal">
+    <div class="crm-modal-card">
+      <div class="crm-modal-header">
+        <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--crm-primary); margin: 0;">
+          Add New Lead (Walk-in / Phone Inquiry)
+        </h3>
+        <button class="crm-drawer-close" id="btnCloseNewLeadModal" style="color: var(--crm-text-muted); background: #f1f5f9;">&times;</button>
+      </div>
+      <form id="newLeadForm">
+        <div class="crm-modal-body">
+          <div class="crm-grid-2">
+            <div class="crm-form-group">
+              <label class="crm-label" for="manualParentName">Parent / Guardian Name <span style="color: red;">*</span></label>
+              <input type="text" id="manualParentName" class="crm-input" required placeholder="e.g. Ramesh Chandra">
+            </div>
+            <div class="crm-form-group">
+              <label class="crm-label" for="manualStudentName">Student Name</label>
+              <input type="text" id="manualStudentName" class="crm-input" placeholder="e.g. Aryan Chandra">
+            </div>
+          </div>
+
+          <div class="crm-grid-2">
+            <div class="crm-form-group">
+              <label class="crm-label" for="manualPhone">Mobile Number (10 Digits) <span style="color: red;">*</span></label>
+              <input type="tel" id="manualPhone" class="crm-input" required placeholder="10-digit mobile">
+            </div>
+            <div class="crm-form-group">
+              <label class="crm-label" for="manualEmail">Email Address</label>
+              <input type="email" id="manualEmail" class="crm-input" placeholder="parent@example.com">
+            </div>
+          </div>
+
+          <div class="crm-grid-2">
+            <div class="crm-form-group">
+              <label class="crm-label" for="manualClass">Class Applying For <span style="color: red;">*</span></label>
+              <select id="manualClass" class="crm-select-full" required>
+                <option value="">Select Grade Level</option>
+                <option value="Primary (Classes 1-5)">Primary (Classes 1–5)</option>
+                <option value="Middle School (Classes 6-8)">Middle School (Classes 6–8)</option>
+                <option value="Secondary (Classes 9-10)">Secondary School (Classes 9–10)</option>
+                <option value="Senior Secondary (Classes 11-12)">Senior Secondary (Classes 11–12)</option>
+              </select>
+            </div>
+            <div class="crm-form-group">
+              <label class="crm-label" for="manualSource">Inquiry Source</label>
+              <select id="manualSource" class="crm-select-full">
+                <option value="School Front Desk Walk-In">School Front Desk Walk-In</option>
+                <option value="Phone Call Inquiry">Phone Call Inquiry</option>
+                <option value="Parent Recommendation">Parent Recommendation</option>
+                <option value="Education Fair">Education Fair / Banaras Expo</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="crm-grid-2">
+            <div class="crm-form-group">
+              <label class="crm-label" for="manualPriority">Priority</label>
+              <select id="manualPriority" class="crm-select-full">
+                <option value="high">High Priority</option>
+                <option value="urgent">🔥 Urgent</option>
+                <option value="medium" selected>Medium</option>
+                <option value="low">Low</option>
+              </select>
+            </div>
+            <div class="crm-form-group">
+              <label class="crm-label" for="manualCounselor">Assign To</label>
+              <select id="manualCounselor" class="crm-select-full">
+                <option value="Admissions Desk">Admissions Desk</option>
+                <option value="Counselor Anjali">Counselor Anjali</option>
+                <option value="Counselor Manish">Counselor Manish</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="crm-form-group">
+            <label class="crm-label" for="manualMessage">Notes / Parent Query</label>
+            <textarea id="manualMessage" class="crm-textarea" rows="3" placeholder="Enter previous school, bus transport requirements, fee enquiry notes..."></textarea>
+          </div>
+        </div>
+        <div class="crm-modal-footer">
+          <button type="button" class="btn-crm btn-crm-ghost" id="btnCancelNewLead">Cancel</button>
+          <button type="submit" class="btn-crm btn-crm-gold">Save &amp; Add Lead</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       5. MODAL: SUPABASE BACKEND CONFIGURATION & SETUP
+       ========================================================================= -->
+  <div class="crm-modal-backdrop" id="supabaseConfigModal">
+    <div class="crm-modal-card" style="max-width: 680px;">
+      <div class="crm-modal-header">
+        <div style="display: flex; align-items: center; gap: 0.65rem;">
+          <span style="font-size: 1.5rem;">⚡</span>
+          <div>
+            <h3 style="font-size: 1.15rem; font-weight: 700; color: var(--crm-primary); margin: 0;">
+              Supabase Backend Setup &amp; Sync
+            </h3>
+            <div style="font-size: 0.75rem; color: var(--crm-text-muted);">
+              PostgreSQL Database &bull; Realtime Replication &bull; Row Level Security
+            </div>
+          </div>
+        </div>
+        <button class="crm-drawer-close" id="btnCloseSupabaseModal" style="color: var(--crm-text-muted); background: #f1f5f9;">&times;</button>
+      </div>
+      <div class="crm-modal-body">
+        <div id="connectionStatusAlert" style="padding: 0.85rem 1rem; border-radius: var(--crm-radius-md); font-size: 0.85rem; margin-bottom: 1.25rem; background: #EFF6FF; border: 1px solid #BFDBFE; color: #1E40AF;">
+          <strong>Status:</strong> Connecting to your Supabase PostgreSQL instance...
+        </div>
+
+        <div class="crm-form-group">
+          <label class="crm-label" for="cfgSupabaseUrl">Supabase Project URL <span style="color: red;">*</span></label>
+          <input type="url" id="cfgSupabaseUrl" class="crm-input" placeholder="https://xyzprojectid.supabase.co">
+          <div style="font-size: 0.72rem; color: var(--crm-text-light); margin-top: 0.25rem;">
+            Found under Supabase Dashboard &rarr; Project Settings &rarr; API &rarr; Project URL
+          </div>
+        </div>
+
+        <div class="crm-form-group">
+          <label class="crm-label" for="cfgSupabaseAnon">Supabase Anon Public API Key <span style="color: red;">*</span></label>
+          <input type="password" id="cfgSupabaseAnon" class="crm-input" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
+          <div style="font-size: 0.72rem; color: var(--crm-text-light); margin-top: 0.25rem;">
+            Found under Supabase Dashboard &rarr; Project Settings &rarr; API &rarr; Project API Keys &rarr; anon public
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem; margin-bottom: 1.25rem;">
+          <button type="button" id="btnTestSupabase" class="btn-crm btn-crm-primary" style="font-size: 0.82rem;">
+            Test &amp; Save Supabase Connection
+          </button>
+          <button type="button" id="btnSyncLocalLeads" class="btn-crm btn-crm-outline" style="color: var(--crm-primary); border-color: var(--crm-border); font-size: 0.82rem;">
+            🔄 Sync Offline Inquiries to Supabase
+          </button>
+        </div>
+
+        <div style="background: #F8FAFC; border: 1px solid var(--crm-border); border-radius: var(--crm-radius-md); padding: 1rem;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
+            <strong style="font-size: 0.84rem; color: var(--crm-primary);">Need Database Schema?</strong>
+            <button id="btnCopySqlSchema" class="btn-crm btn-crm-gold" style="font-size: 0.72rem; padding: 0.25rem 0.6rem;">
+              📋 Copy SQL Schema
+            </button>
+          </div>
+          <p style="font-size: 0.78rem; color: var(--crm-text-muted); margin-bottom: 0.5rem;">
+            Paste this SQL script in your Supabase <strong>SQL Editor</strong> to create the <code>leads</code> table, indexes, triggers, and sample data.
+          </p>
+          <div style="font-size: 0.72rem; color: #475569;">
+            📁 File location in codebase: <code>supabase/schema.sql</code>
+          </div>
+        </div>
+      </div>
+      <div class="crm-modal-footer">
+        <button type="button" class="btn-crm btn-crm-ghost" id="btnResetToDemo">
+          Load Sample Demo Data
+        </button>
+        <button type="button" class="btn-crm btn-crm-primary" id="btnDoneSupabaseModal">
+          Close Settings
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Toast Notification Container -->
+  <div class="toast-container" id="crmToastContainer"></div>
+
+  <!-- Scripts -->
+  <script src="js/main.js"></script>
+  <script src="js/supabase-client.js"></script>
+  <script src="js/crm.js"></script>
+</body>
+</html>
