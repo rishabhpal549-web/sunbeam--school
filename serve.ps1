@@ -50,13 +50,17 @@ try {
             $bytes = [System.IO.File]::ReadAllBytes($filePath)
             $response.ContentLength64 = $bytes.Length
             $response.StatusCode = 200
-            $response.OutputStream.Write($bytes, 0, $bytes.Length)
+            if ($request.HttpMethod -ne "HEAD") {
+                $response.OutputStream.Write($bytes, 0, $bytes.Length)
+            }
         } else {
             $notFound = [System.Text.Encoding]::UTF8.GetBytes("<h1>404 Not Found</h1><p>The requested file was not found.</p>")
             $response.StatusCode = 404
             $response.ContentType = "text/html; charset=utf-8"
             $response.ContentLength64 = $notFound.Length
-            $response.OutputStream.Write($notFound, 0, $notFound.Length)
+            if ($request.HttpMethod -ne "HEAD") {
+                $response.OutputStream.Write($notFound, 0, $notFound.Length)
+            }
         }
 
         $response.Close()

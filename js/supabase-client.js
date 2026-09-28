@@ -430,19 +430,12 @@
       };
 
       if (client && isSupabaseReady) {
+        let enqSavedRecord = null;
+        let leadsSavedRecord = null;
+        let anySuccess = false;
+
+        // 1. Primary: Save directly to existing 'enquiries' table (preserving original schema)
         try {
-          const { data, error } = await client
-            .from('leads')
-            .insert([sanitized])
-            .select();
-
-          if (!error && data && data.length > 0) {
-            // Trigger instant email notification to school admin
-            sendEmailNotification(sanitized).catch(() => {});
-            return { success: true, data: data[0], source: 'supabase' };
-          }
-
-          // Fallback to inserting into 'enquiries' table
           const enqPayload = {
             Parent_name: sanitized.parent_name,
             student_name: sanitized.student_name,
@@ -453,15 +446,41 @@
           };
           const enqRes = await client.from('enquiries').insert([enqPayload]).select();
           if (!enqRes.error && enqRes.data && enqRes.data.length > 0) {
-            const saved = { ...sanitized, ...enqRes.data[0], parent_name: enqRes.data[0].Parent_name || sanitized.parent_name };
-            sendEmailNotification(sanitized).catch(() => {});
-            return { success: true, data: saved, source: 'supabase' };
+            enqSavedRecord = enqRes.data[0];
+            anySuccess = true;
+          } else if (enqRes.error) {
+            console.warn('Enquiries table insert note:', enqRes.error.message);
           }
-
-          console.warn('Supabase insert failed, storing locally:', error || enqRes.error);
-        } catch (err) {
-          console.warn('Supabase insert error:', err);
+        } catch (enqErr) {
+          console.warn('Enquiries table insert exception:', enqErr);
         }
+
+        // 2. Secondary: Also save to 'leads' table for CRM and pipeline sync
+        try {
+          const { data, error } = await client
+            .from('leads')
+            .insert([sanitized])
+            .select();
+          if (!error && data && data.length > 0) {
+            leadsSavedRecord = data[0];
+            anySuccess = true;
+          }
+        } catch (leadErr) {
+          console.warn('Leads table insert exception:', leadErr);
+        }
+
+        if (anySuccess) {
+          // Trigger instant email notification to school admin
+          sendEmailNotification(sanitized).catch(() => {});
+          const resultData = leadsSavedRecord || {
+            ...sanitized,
+            ...enqSavedRecord,
+            parent_name: enqSavedRecord?.Parent_name || sanitized.parent_name
+          };
+          return { success: true, data: resultData, source: 'supabase' };
+        }
+
+        console.warn('Supabase insert did not succeed on both tables, falling back to local storage.');
       }
 
       // Local fallback

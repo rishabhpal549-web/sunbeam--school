@@ -62,25 +62,22 @@
           <li><a href="facilities.html" class="nav-link">Facilities</a></li>
           <li><a href="activities.html" class="nav-link">Activities</a></li>
           <li><a href="gallery.html" class="nav-link">Gallery</a></li>
-          <li class="has-dropdown">
-            <a href="#" class="nav-link dropdown-trigger" aria-haspopup="true" aria-expanded="false">
-              More <span style="font-size: 0.75rem;">▼</span>
-            </a>
-            <ul class="dropdown-menu" aria-label="Submenu">
-              <li><a href="#achievements">🏆 Achievements</a></li>
-              <li><a href="faculty.html">👨‍🏫 Faculty &amp; Staff</a></li>
-              <li><a href="notices.html">📌 Notice Board</a></li>
-              <li><a href="fees.html">💳 Fee Structure</a></li>
-              <li><a href="contact.html">📞 Contact School</a></li>
-              <li><a href="crm.html" style="color: var(--accent); font-weight: 600;">📊 Admissions CRM</a></li>
-            </ul>
-          </li>
+          <li><a href="notices.html" class="nav-link">Notices</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+          <li><a href="projects.html" class="nav-link nav-link-projects">All Projects</a></li>
+          <li><a href="enquiry.html" class="nav-link nav-link-enquiry">Enquiry</a></li>
         </ul>
       </nav>
 
       <!-- Header Action CTAs -->
       <div class="header-actions">
-        <a href="admissions.html" class="btn btn-gold btn-sm trigger-admission-modal">Apply for Admission</a>
+        <button type="button" class="btn-whatsapp-header" data-whatsapp-widget-trigger="true" title="WhatsApp Admissions Enquiry (+91 9519073791)">
+          <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="15" height="15" fill="currentColor">
+            <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+          </svg>
+          <span>WhatsApp Enquiry</span>
+        </button>
+        <a href="enquiry.html" class="btn btn-gold btn-sm trigger-admission-modal">Apply / Enquiry</a>
         <button class="mobile-toggle" aria-label="Open Mobile Menu" aria-expanded="false">
           ☰
         </button>
@@ -103,17 +100,20 @@
       <a href="about.html">About School</a>
       <a href="academics.html">Academics</a>
       <a href="admissions.html">Admissions</a>
-      <a href="fees.html">Fee Structure</a>
       <a href="facilities.html">Facilities</a>
-      <a href="activities.html">Activities &amp; Events</a>
-      <a href="gallery.html">Photo Gallery</a>
+      <a href="activities.html">Activities</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="notices.html">Notices</a>
+      <a href="contact.html">Contact</a>
+      <a href="projects.html" class="highlight-link">All Projects</a>
+      <a href="enquiry.html" class="highlight-link">Online Enquiry</a>
+      <div class="drawer-nav-divider"></div>
+      <a href="fees.html">Fee Structure</a>
       <a href="faculty.html">Faculty Directory</a>
-      <a href="notices.html">Notice Board</a>
-      <a href="contact.html">Contact Us</a>
     </nav>
-    <div class="drawer-cta">
-      <a href="admissions.html" class="btn btn-gold btn-block trigger-admission-modal">Apply for Admission &rarr;</a>
-      <a href="contact.html" class="btn btn-outline btn-block" style="margin-top: 0.75rem;">Contact School</a>
+    <div class="drawer-cta" style="margin-top: 1.5rem;">
+      <a href="enquiry.html" class="btn btn-gold btn-block trigger-admission-modal">Submit Online Enquiry &rarr;</a>
+      <a href="projects.html" class="btn btn-outline btn-block" style="margin-top: 0.75rem;">Explore All Projects &rarr;</a>
     </div>
   </aside>
 
@@ -136,12 +136,26 @@
             Inspiring young minds through learning, values, creativity and holistic development in the historic educational hub of Varanasi.
           </p>
           <div class="hero-actions">
-            <a href="admissions.html" class="btn btn-gold btn-lg trigger-admission-modal">Apply for Admission &rarr;</a>
-            <a href="#welcome" class="btn btn-outline-white btn-lg">Explore Our School</a>
+            <a href="#enquiry" class="btn btn-gold btn-lg">Submit Online Enquiry &rarr;</a>
+            <a href="#projects" class="btn btn-outline-white btn-lg">Explore All Projects &rarr;</a>
           </div>
-          <div style="margin-top: 2rem; display: flex; align-items: center; gap: 1.5rem; font-size: 0.88rem; color: #CBD5E1;">
+
+          <!-- Primary Share URL Banner -->
+          <div class="share-link-banner" style="margin-top: 1.75rem;">
+            <div class="share-link-banner-text">
+              <span class="share-badge">Primary Share URL</span>
+              <span style="font-size: 0.88rem;">Main Link:</span>
+              <span class="share-url-code" id="heroShareLink">https://sunbeam-school.vercel.app/</span>
+            </div>
+            <button class="btn-copy-link" onclick="copyPrimaryUrl()">
+              <span>📋</span> Copy Link
+            </button>
+          </div>
+
+          <div style="margin-top: 1.75rem; display: flex; align-items: center; gap: 1.5rem; font-size: 0.88rem; color: #CBD5E1; flex-wrap: wrap;">
             <span>📍 Bhagwanpur, Varanasi (U.P.)</span>
-            <span>🎓 K–12 Education</span>
+            <span>🎓 K–12 CBSE Education</span>
+            <span>⭐ Admissions AY 2026–27 Open</span>
           </div>
         </div>
 
@@ -288,9 +302,19 @@
                 Join an inspiring learning community dedicated to academic rigor, co-curricular exposure, and holistic character building in Bhagwanpur, Varanasi.
               </p>
             </div>
-            <div class="hero-actions">
+            <div class="hero-actions" style="display: flex; gap: 0.85rem; flex-wrap: wrap; align-items: center;">
               <a href="admissions.html" class="btn btn-gold btn-lg trigger-admission-modal">Apply for Admission &rarr;</a>
               <a href="contact.html" class="btn btn-outline-white btn-lg">Admission Enquiry</a>
+              <a href="https://wa.me/919519073791?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20admission%20at%20Sunbeam%20School.%20Please%20share%20the%20admission%20details." 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="btn-whatsapp btn-whatsapp-lg" 
+                 data-whatsapp-enquiry>
+                <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="20" height="20" fill="currentColor" aria-hidden="true">
+                  <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+                </svg>
+                Enquire on WhatsApp
+              </a>
             </div>
           </div>
 
@@ -300,6 +324,303 @@
               <span>[Temporary Practice Image]</span>
               <span class="badge">Practice</span>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         ALL PROJECTS & PORTAL SHOWCASE SECTION
+         ======================================================================= -->
+    <section class="section section-alt" id="projects" aria-label="All Projects and Directory">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow eyebrow-badge">ALL PROJECTS &amp; DIRECTORY</span>
+          <h2>Explore All School Projects &amp; Portals</h2>
+          <p class="section-subtitle">
+            Access every institutional wing, academic innovation lab, digital portal, and official section of Sunbeam English School, Bhagwanpur from this centralized showcase.
+          </p>
+        </div>
+
+        <div class="projects-grid" style="margin-bottom: 2.5rem;">
+          <!-- 1. Academics -->
+          <div class="project-card">
+            <div>
+              <div class="project-card-top">
+                <div class="project-icon">📚</div>
+                <span class="project-badge badge-core">Core Wing</span>
+              </div>
+              <h3 class="project-card-title">Academics &amp; CBSE Streams</h3>
+              <p class="project-card-desc">
+                NCERT-aligned curriculum for K-12 with Science (PCB/PCM), Commerce, and Humanities streams with smart classes.
+              </p>
+            </div>
+            <div class="project-card-footer">
+              <a href="academics.html" class="btn btn-outline btn-sm btn-block">Explore Academics &rarr;</a>
+            </div>
+          </div>
+
+          <!-- 2. Admissions -->
+          <div class="project-card">
+            <div>
+              <div class="project-card-top">
+                <div class="project-icon">🎓</div>
+                <span class="project-badge badge-core">Core Wing</span>
+              </div>
+              <h3 class="project-card-title">Admissions 2026–27</h3>
+              <p class="project-card-desc">
+                Eligibility criteria, age matrix, document checklist, and step-by-step guidance for new student enrollment.
+              </p>
+            </div>
+            <div class="project-card-footer">
+              <a href="admissions.html" class="btn btn-outline btn-sm btn-block">Admissions Guide &rarr;</a>
+            </div>
+          </div>
+
+          <!-- 3. Online Enquiry -->
+          <div class="project-card" style="border: 2px solid var(--accent);">
+            <div>
+              <div class="project-card-top">
+                <div class="project-icon" style="background: #FEF3C7; color: #B45309;">📝</div>
+                <span class="project-badge badge-digital">Live System</span>
+              </div>
+              <h3 class="project-card-title">Online Admission Enquiry</h3>
+              <p class="project-card-desc">
+                Direct preliminary enquiry portal connected to live Supabase database with instant counselor notification.
+              </p>
+            </div>
+            <div class="project-card-footer">
+              <a href="#enquiry" class="btn btn-gold btn-sm btn-block" style="font-weight: 700;">Submit Enquiry Below &darr;</a>
+            </div>
+          </div>
+
+          <!-- 4. ATL Innovation Lab -->
+          <div class="project-card">
+            <div>
+              <div class="project-card-top">
+                <div class="project-icon" style="background: #ECFDF5; color: #047857;">🤖</div>
+                <span class="project-badge badge-stem">STEM Lab</span>
+              </div>
+              <h3 class="project-card-title">Atal Tinkering Lab (ATL)</h3>
+              <p class="project-card-desc">
+                State-of-the-art innovation workspace equipped with robotics, 3D printing, electronics kits, and coding bootcamps.
+              </p>
+            </div>
+            <div class="project-card-footer">
+              <a href="facilities.html" class="btn btn-outline btn-sm btn-block">Explore ATL Lab &rarr;</a>
+            </div>
+          </div>
+
+          <!-- 5. Facilities & Smart Campus -->
+          <div class="project-card">
+            <div>
+              <div class="project-card-top">
+                <div class="project-icon">🏢</div>
+                <span class="project-badge badge-core">Core Wing</span>
+              </div>
+              <h3 class="project-card-title">Facilities &amp; Infrastructure</h3>
+              <p class="project-card-desc">
+                Composite science labs, library, GPS-enabled school bus transportation, and sports grounds in Bhagwanpur.
+              </p>
+            </div>
+            <div class="project-card-footer">
+              <a href="facilities.html" class="btn btn-outline btn-sm btn-block">Campus Facilities &rarr;</a>
+            </div>
+          </div>
+
+          <!-- 6. Activities & Co-Curricular -->
+          <div class="project-card">
+            <div>
+              <div class="project-card-top">
+                <div class="project-icon">🎨</div>
+                <span class="project-badge badge-activity">Campus Life</span>
+              </div>
+              <h3 class="project-card-title">Activities &amp; Sports</h3>
+              <p class="project-card-desc">
+                Annual athletic meets, literary fest, youth parliamentary debate, martial arts, music, and creative arts.
+              </p>
+            </div>
+            <div class="project-card-footer">
+              <a href="activities.html" class="btn btn-outline btn-sm btn-block">Student Activities &rarr;</a>
+            </div>
+          </div>
+        </div>
+
+        <div style="text-align: center;">
+          <a href="projects.html" class="btn btn-primary btn-lg">
+            View Complete All Projects &amp; Portals Directory (14 Sections) &rarr;
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- =======================================================================
+         HOMEPAGE DIRECT ONLINE ENQUIRY SECTION
+         ======================================================================= -->
+    <section class="section" id="enquiry" aria-label="Direct Admission Enquiry">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow eyebrow-badge">DIRECT ONLINE APPLICATION</span>
+          <h2>Online Admissions Enquiry (AY 2026–2027)</h2>
+          <p class="section-subtitle">
+            Submit your child's preliminary admission inquiry below. Our Bhagwanpur admissions desk will review and contact you promptly.
+          </p>
+        </div>
+
+        <div class="grid-2" style="grid-template-columns: 1fr 1.35fr; gap: 2.5rem; align-items: start;">
+          <!-- Left Info Column -->
+          <div class="enquiry-info-box" style="border-radius: var(--radius-md); box-shadow: var(--shadow-md);">
+            <span class="eyebrow eyebrow-gold" style="font-size: 0.78rem;">ADMISSIONS COUNSELING DESK</span>
+            <h3 style="margin-bottom: 1rem; font-size: 1.35rem;">Sunbeam English School, Bhagwanpur</h3>
+            <p style="font-size: 0.9rem; color: #CBD5E1; line-height: 1.6; margin-bottom: 1.5rem;">
+              Have questions regarding admissions, curriculum, bus routes, or school timings? Connect with our admissions counselors directly.
+            </p>
+
+            <div class="enquiry-contact-item">
+              <span class="enquiry-contact-icon">📍</span>
+              <div>
+                <strong style="color: #fff; display: block;">Campus Location</strong>
+                <span>Bhagwanpur, Near Lanka, Varanasi, U.P. — 221005</span>
+              </div>
+            </div>
+
+            <div class="enquiry-contact-item">
+              <span class="enquiry-contact-icon">📞</span>
+              <div>
+                <strong style="color: #fff; display: block;">Helpline Numbers</strong>
+                <span>0542-2366333 &bull; +91 98390 12345</span>
+              </div>
+            </div>
+
+            <div class="enquiry-contact-item">
+              <span class="enquiry-contact-icon">✉️</span>
+              <div>
+                <strong style="color: #fff; display: block;">Email Address</strong>
+                <span>admissions@sunbeambhagwanpur.edu.in</span>
+              </div>
+            </div>
+
+            <div class="enquiry-contact-item">
+              <span class="enquiry-contact-icon">⏰</span>
+              <div>
+                <strong style="color: #fff; display: block;">Counseling Timings</strong>
+                <span>Monday – Saturday: 8:00 AM – 3:30 PM (IST)</span>
+              </div>
+            </div>
+
+            <div class="enquiry-contact-item">
+              <span class="enquiry-contact-icon">💬</span>
+              <div>
+                <strong style="color: #fff; display: block;">WhatsApp Admission Helpline</strong>
+                <span>+91 9519073791 &bull; Instant Counselor Chat</span>
+              </div>
+            </div>
+
+            <div style="margin-top: 1.25rem; margin-bottom: 1.25rem;">
+              <a href="https://wa.me/919519073791?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20admission%20at%20Sunbeam%20School.%20Please%20share%20the%20admission%20details." 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="btn-whatsapp btn-whatsapp-block" 
+                 data-whatsapp-enquiry>
+                <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="20" height="20" fill="currentColor" aria-hidden="true">
+                  <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+                </svg>
+                Enquire on WhatsApp
+              </a>
+            </div>
+
+            <div style="background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(248, 197, 49, 0.35); border-radius: var(--radius-sm); padding: 1rem; font-size: 0.82rem; color: #E2E8F0;">
+              <strong style="color: var(--accent); display: block; margin-bottom: 0.25rem;">🔒 Private &amp; Secure Submission:</strong>
+              Your application details are securely saved in our Supabase admissions database. Other public visitors cannot view your submission.
+            </div>
+          </div>
+
+          <!-- Right Form Column -->
+          <div class="card" style="padding: 2.25rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); border: 1px solid var(--border-light); background: #fff;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.5rem;">
+              <h3 style="font-size: 1.35rem; color: var(--primary); margin-bottom: 0;">
+                Quick Admission Enquiry
+              </h3>
+              <span class="badge" style="background: var(--light-blue); color: var(--primary); font-weight: 700; padding: 0.3rem 0.75rem; border-radius: var(--radius-full); font-size: 0.75rem;">
+                Session 2026–27
+              </span>
+            </div>
+
+            <!-- In-Page Form Success Alert -->
+            <div class="form-success-alert" style="display: none;"></div>
+
+            <form id="homeEnquiryForm" novalidate>
+              <div class="grid-2" style="gap: 1.25rem;">
+                <div class="form-group">
+                  <label class="form-label">Parent / Guardian Name <span class="req">*</span></label>
+                  <input type="text" name="parent_name" class="form-control" placeholder="Enter parent full name" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Student Name <span class="req">*</span></label>
+                  <input type="text" name="student_name" class="form-control" placeholder="Enter student full name" required>
+                </div>
+              </div>
+
+              <div class="grid-2" style="gap: 1.25rem;">
+                <div class="form-group">
+                  <label class="form-label">Mobile Phone Number <span class="req">*</span></label>
+                  <div style="position: relative;">
+                    <span style="position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); font-weight: 600; color: var(--text-muted); font-size: 0.9rem;">+91</span>
+                    <input type="tel" name="phone" class="form-control" style="padding-left: 3.2rem;" placeholder="10-digit mobile number" maxlength="10" required>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Class Applying For <span class="req">*</span></label>
+                  <select name="class_applying" class="form-control" required>
+                    <option value="">Select Class / Grade</option>
+                    <option value="Pre-Primary (Nursery, LKG, UKG)">Pre-Primary (Nursery, LKG, UKG)</option>
+                    <option value="Primary (Classes 1-5)">Primary Wing (Classes 1–5)</option>
+                    <option value="Middle School (Classes 6-8)">Middle School (Classes 6–8)</option>
+                    <option value="Secondary (Classes 9-10)">Secondary School (Classes 9–10)</option>
+                    <option value="Senior Secondary - Science (PCM/PCB)">Class 11/12 — Science (PCM / PCB)</option>
+                    <option value="Senior Secondary - Commerce">Class 11/12 — Commerce</option>
+                    <option value="Senior Secondary - Humanities">Class 11/12 — Humanities / Arts</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Email Address <span style="font-weight: 400; color: var(--text-muted);">(Optional)</span></label>
+                <input type="email" name="email" class="form-control" placeholder="parent.email@example.com">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label">Message / Bus Transport Query <span style="font-weight: 400; color: var(--text-muted);">(Optional)</span></label>
+                <textarea name="message" class="form-control" rows="2" placeholder="Mention previous school, required bus transport route, or specific questions..."></textarea>
+              </div>
+
+              <button type="submit" class="btn btn-gold btn-lg btn-block" style="font-size: 1.05rem; font-weight: 700; width: 100%; padding: 0.9rem;">
+                Submit Admission Enquiry &rarr;
+              </button>
+
+              <div style="display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-top: 1rem; margin-bottom: 0.75rem;">
+                <span style="height: 1px; background: var(--border-light); flex: 1;"></span>
+                <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; font-weight: 600;">OR SEND DIRECTLY TO WHATSAPP</span>
+                <span style="height: 1px; background: var(--border-light); flex: 1;"></span>
+              </div>
+
+              <a href="https://wa.me/919519073791?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20admission%20at%20Sunbeam%20School.%20Please%20share%20the%20admission%20details." 
+                 target="_blank" 
+                 rel="noopener noreferrer" 
+                 class="btn-whatsapp btn-whatsapp-outline btn-whatsapp-block" 
+                 data-whatsapp-enquiry 
+                 title="Send this enquiry with your filled details directly to official WhatsApp"
+                 style="font-size: 0.95rem; padding: 0.75rem;">
+                <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="18" height="18" fill="currentColor" aria-hidden="true">
+                  <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+                </svg>
+                Send Enquiry via WhatsApp
+              </a>
+
+              <div style="font-size: 0.76rem; color: var(--text-muted); text-align: center; margin-top: 0.75rem;">
+                🔒 Securely synced with Sunbeam Supabase Admissions Database.
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -1474,11 +1795,13 @@
             <li><a href="about.html">About Us</a></li>
             <li><a href="academics.html">Academics</a></li>
             <li><a href="admissions.html">Admissions</a></li>
-            <li><a href="fees.html">Fee Structure</a></li>
+            <li><a href="projects.html" style="color: var(--accent); font-weight: 600;">All Projects Hub</a></li>
+            <li><a href="enquiry.html" style="color: var(--accent); font-weight: 600;">Online Enquiry</a></li>
             <li><a href="facilities.html">Facilities</a></li>
             <li><a href="gallery.html">Photo Gallery</a></li>
+            <li><a href="notices.html">Notice Board</a></li>
+            <li><a href="fees.html">Fee Structure</a></li>
             <li><a href="contact.html">Contact Us</a></li>
-            <li><a href="crm.html" style="color: var(--accent); font-weight: 600;">Admissions CRM Portal</a></li>
           </ul>
         </div>
 
@@ -1542,7 +1865,25 @@
     </div>
   </div>
 
+  <!-- Floating WhatsApp Action Button (Official School Contact: +91 9519073791) -->
+  <a href="https://wa.me/919519073791?text=Hello%2C%20I%20would%20like%20to%20enquire%20about%20admission%20at%20Sunbeam%20School.%20Please%20share%20the%20admission%20details." 
+     class="whatsapp-float" 
+     id="whatsappFloat" 
+     target="_blank" 
+     rel="noopener noreferrer" 
+     aria-label="Enquire about admission on WhatsApp" 
+     title="Enquire on WhatsApp (+91 9519073791)">
+    <span class="whatsapp-float-tooltip">
+      <span class="whatsapp-tooltip-dot"></span>
+      <span>Enquire on WhatsApp</span>
+    </span>
+    <svg class="whatsapp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" width="32" height="32" fill="currentColor" aria-hidden="true">
+      <path d="M380.9 97.1C339 55.1 283.2 32 223.9 32c-122.4 0-222 99.6-222 222 0 39.1 10.2 77.3 29.6 111L0 480l117.7-30.9c32.4 17.7 68.9 27 106.1 27h.1c122.3 0 224.1-99.6 224.1-222 0-59.3-25.2-115-67.1-157zm-157 341.6c-33.2 0-65.7-8.9-94-25.7l-6.7-4-69.8 18.3L72 359.2l-4.4-7c-18.5-29.4-28.2-63.3-28.2-98.2 0-101.7 82.8-184.5 184.6-184.5 49.3 0 95.6 19.2 130.4 54.1 34.8 34.9 56.2 81.2 56.1 130.5 0 101.8-84.9 184.6-186.6 184.6zm101.2-138.2c-5.5-2.8-32.8-16.2-37.9-18-5.1-1.9-8.8-2.8-12.5 2.8-3.7 5.6-14.3 18-17.6 21.8-3.2 3.7-6.5 4.2-12 1.4-32.6-16.3-54-29.1-75.5-66-5.7-9.8 5.7-9.1 16.3-30.3 1.8-3.7.9-6.9-.5-9.7-1.4-2.8-12.5-30.1-17.1-41.2-4.5-10.8-9.1-9.3-12.5-9.5-3.2-.2-6.9-.2-10.6-.2-3.7 0-9.7 1.4-14.8 6.9-5.1 5.6-19.4 19-19.4 46.3 0 27.3 19.9 53.7 22.6 57.4 2.8 3.7 39.1 59.7 94.8 83.8 35.2 15.2 49 16.5 66.6 13.9 10.7-1.6 32.8-13.4 37.4-26.4 4.6-13 4.6-24.1 3.2-26.4-1.3-2.5-5-3.9-10.5-6.6z"/>
+    </svg>
+  </a>
+
   <!-- Scripts -->
+  <script src="js/whatsapp-config.js"></script>
   <script src="js/main.js"></script>
   <script src="js/gallery.js"></script>
   <script src="js/notices.js"></script>

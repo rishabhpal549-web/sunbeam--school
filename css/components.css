@@ -133,21 +133,22 @@
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 0.35rem;
+  gap: 0.2rem;
   list-style: none;
 }
 
 .nav-link {
   font-family: var(--font-heading);
-  font-size: 0.92rem;
+  font-size: 0.85rem;
   font-weight: 500;
   color: var(--text-main);
-  padding: 0.5rem 0.75rem;
+  padding: 0.42rem 0.52rem;
   border-radius: var(--radius-sm);
   transition: all var(--transition-fast);
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
+  gap: 0.2rem;
+  white-space: nowrap;
 }
 
 .nav-link:hover,
@@ -157,8 +158,31 @@
 }
 
 .nav-link.active {
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.nav-link-enquiry {
+  background: var(--accent);
+  color: var(--primary-dark) !important;
+  font-weight: 700 !important;
+  border-radius: var(--radius-full);
+  padding: 0.35rem 0.85rem !important;
+  box-shadow: 0 2px 6px rgba(248, 197, 49, 0.35);
+  margin-left: 0.15rem;
+}
+
+.nav-link-enquiry:hover {
+  background: var(--accent-hover) !important;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(248, 197, 49, 0.45);
+}
+
+.nav-link-projects {
+  color: var(--primary);
   font-weight: 600;
 }
+
 
 /* Dropdown Menu */
 .has-dropdown {
@@ -1913,3 +1937,312 @@
     display: none;
   }
 }
+
+/* --------------------------------------------------------------------------
+   14. Breakpoint for 11-Item Navigation Bar
+   -------------------------------------------------------------------------- */
+@media (max-width: 1180px) {
+  .nav-menu {
+    display: none;
+  }
+  .mobile-toggle {
+    display: block;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   15. Unified Share Link Banner & Cards
+   -------------------------------------------------------------------------- */
+.share-link-banner {
+  background: linear-gradient(135deg, rgba(6, 59, 102, 0.96), rgba(4, 39, 68, 0.98));
+  border: 1px solid rgba(248, 197, 49, 0.4);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  box-shadow: var(--shadow-md);
+  margin-top: 1.75rem;
+  color: var(--white);
+}
+
+.share-link-banner-text {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.92rem;
+  flex-wrap: wrap;
+}
+
+.share-badge {
+  background: var(--accent);
+  color: var(--primary-dark);
+  font-weight: 800;
+  font-size: 0.72rem;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.share-url-code {
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px dashed rgba(248, 197, 49, 0.5);
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radius-sm);
+  font-family: monospace;
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.btn-copy-link {
+  background: var(--accent);
+  color: var(--primary-dark);
+  border: none;
+  font-weight: 700;
+  font-size: 0.82rem;
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.btn-copy-link:hover {
+  background: #fff;
+  transform: translateY(-1px);
+}
+
+/* --------------------------------------------------------------------------
+   16. Projects Directory & Hub Styles
+   -------------------------------------------------------------------------- */
+.projects-header-box {
+  background: linear-gradient(135deg, #042744 0%, #063B66 100%);
+  color: var(--white);
+  padding: 3.5rem 1.5rem;
+  border-radius: var(--radius-lg);
+  margin-bottom: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.projects-filter-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-light);
+}
+
+.projects-filter-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-tab-btn {
+  background: var(--light-neutral);
+  color: var(--text-main);
+  border: 1px solid var(--border-light);
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-full);
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.filter-tab-btn:hover,
+.filter-tab-btn.active {
+  background: var(--primary);
+  color: var(--white);
+  border-color: var(--primary);
+}
+
+.projects-search-input {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-full);
+  font-size: 0.88rem;
+  width: 260px;
+  outline: none;
+  transition: border-color var(--transition-fast);
+}
+
+.projects-search-input:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(6, 59, 102, 0.12);
+}
+
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+.project-card {
+  background: var(--white);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+  position: relative;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(6, 59, 102, 0.25);
+}
+
+.project-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.project-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  background: var(--light-blue);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.project-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-full);
+  letter-spacing: 0.04em;
+}
+
+.badge-core { background: #EEF2FF; color: #4338CA; }
+.badge-stem { background: #ECFDF5; color: #047857; }
+.badge-digital { background: #FEF3C7; color: #B45309; }
+.badge-activity { background: #FCE7F3; color: #BE185D; }
+
+.project-card-title {
+  font-size: 1.18rem;
+  color: var(--primary);
+  margin-bottom: 0.45rem;
+}
+
+.project-card-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+  margin-bottom: 1.25rem;
+  flex-grow: 1;
+}
+
+.project-card-highlights {
+  list-style: none;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.project-card-highlights li {
+  font-size: 0.82rem;
+  color: var(--text-main);
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.project-card-highlights li span {
+  color: var(--success);
+  font-weight: 700;
+}
+
+/* --------------------------------------------------------------------------
+   17. Enquiry Section & Portal Styles
+   -------------------------------------------------------------------------- */
+.enquiry-card-wrapper {
+  background: var(--white);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border-light);
+  overflow: hidden;
+}
+
+.enquiry-info-box {
+  background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary) 100%);
+  color: var(--white);
+  padding: 2.5rem;
+  height: 100%;
+}
+
+.enquiry-info-box h3,
+.enquiry-info-box h4 {
+  color: var(--white);
+}
+
+.enquiry-contact-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  margin-bottom: 1.15rem;
+  font-size: 0.92rem;
+  color: #E2E8F0;
+}
+
+.enquiry-contact-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.drawer-nav a.highlight-link {
+  background: var(--light-blue);
+  color: var(--primary);
+  font-weight: 700;
+}
+.drawer-nav-divider {
+  height: 1px;
+  background: var(--border-light);
+  margin: 0.75rem 0;
+}
+
+@media (max-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+  .share-link-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .share-url-code {
+    width: 100%;
+  }
+}
+

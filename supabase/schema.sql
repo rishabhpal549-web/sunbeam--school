@@ -19,17 +19,20 @@ BEGIN
     END IF;
 END $$;
 
+-- Enquiries Table: Public can submit (INSERT), but cannot view other submissions (SELECT restricted)
 DROP POLICY IF EXISTS "Public can submit enquiries" ON public.enquiries;
 CREATE POLICY "Public can submit enquiries" ON public.enquiries FOR INSERT TO public WITH CHECK (true);
 
+-- Restrict SELECT on enquiries to authenticated staff / service_role so public visitors cannot view other parent inquiries
 DROP POLICY IF EXISTS "Allow select on enquiries" ON public.enquiries;
-CREATE POLICY "Allow select on enquiries" ON public.enquiries FOR SELECT TO public USING (true);
+CREATE POLICY "Allow select on enquiries" ON public.enquiries FOR SELECT TO authenticated USING (true);
 
 DROP POLICY IF EXISTS "Allow update on enquiries" ON public.enquiries;
-CREATE POLICY "Allow update on enquiries" ON public.enquiries FOR UPDATE TO public USING (true) WITH CHECK (true);
+CREATE POLICY "Allow update on enquiries" ON public.enquiries FOR UPDATE TO authenticated USING (true) WITH CHECK (true);
 
 DROP POLICY IF EXISTS "Allow delete on enquiries" ON public.enquiries;
-CREATE POLICY "Allow delete on enquiries" ON public.enquiries FOR DELETE TO public USING (true);
+CREATE POLICY "Allow delete on enquiries" ON public.enquiries FOR DELETE TO authenticated USING (true);
+
 
 
 -- 2. Create the unified LEADS table

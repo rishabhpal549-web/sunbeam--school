@@ -610,7 +610,9 @@
     const waText = encodeURIComponent(
       `Dear ${lead.parent_name}, Greetings from Sunbeam English School, Bhagwanpur. We received your admission inquiry for ${lead.student_name || 'your child'} (${lead.class_applying || 'General'}). How may our admissions counseling desk assist you today?`
     );
-    const waLink = `https://wa.me/91${lead.phone.replace(/\D/g, '')}?text=${waText}`;
+    let cleanPhone = (lead.phone || '').replace(/\D/g, '');
+    if (cleanPhone.length === 10) cleanPhone = '91' + cleanPhone;
+    const waLink = `https://wa.me/${cleanPhone}?text=${waText}`;
 
     card.innerHTML = `
       <div class="lead-card-header">
@@ -880,7 +882,9 @@
     const waText = encodeURIComponent(
       `Dear ${lead.parent_name}, Greetings from Sunbeam English School, Bhagwanpur. We are contacting you regarding the admission enquiry for ${lead.student_name || 'your child'}:`
     );
-    dom.drawerBtnWhatsApp.href = `https://wa.me/91${lead.phone.replace(/\D/g, '')}?text=${waText}`;
+    let cleanPhone = (lead.phone || '').replace(/\D/g, '');
+    if (cleanPhone.length === 10) cleanPhone = '91' + cleanPhone;
+    dom.drawerBtnWhatsApp.href = `https://wa.me/${cleanPhone}?text=${waText}`;
     dom.drawerBtnCall.href = `tel:${lead.phone}`;
     dom.drawerBtnEmail.href = lead.email ? `mailto:${lead.email}?subject=Sunbeam%20English%20School%20Admissions` : '#';
 
